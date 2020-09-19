@@ -1,0 +1,363 @@
+version: "2.0"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - learn_dsa:
+      triggers: utter_array_question_bank
+  - array_question_bank:
+      triggers: utter_array_first_question_from_bank
+  - array_first_question_from_bank:
+      triggers: utter_array_first_hint1
+  - array_first_hint1:
+      triggers: utter_array_first_hint2
+  - array_first_hint2:
+      triggers: utter_array_first_complete_solution
+  - array_first_complete_solution: 
+      triggers: utter_array_first_understood
+  - array_first_understood:
+      triggers: utter_array_second_question_from_bank
+  - array_second_question_from_bank:
+      triggers: utter_array_second_hint1
+  - array_second_hint1:
+      triggers: utter_array_second_hint2
+  - array_second_hint2:
+      triggers: utter_array_second_complete_solution
+  - array_second_complete_solution: 
+      triggers: utter_array_second_understood
+  - array_second_understood:
+      triggers: utter_array_third_question_from_bank
+  - array_third_question_from_bank:
+      triggers: utter_array_third_hint1
+  - array_third_hint1:
+      triggers: utter_array_third_hint2
+  - array_third_hint2:
+      triggers: utter_array_third_complete_solution
+  - array_third_complete_solution: 
+      triggers: utter_array_third_understood
+  - array_third_understood:
+      triggers: utter_good_job  
+
+
+
+actions:
+- utter_array_question_bank
+- utter_array_first_question_from_bank
+- utter_array_first_hint1
+- utter_array_first_hint2
+- utter_array_first_complete_solution
+- utter_array_first_understood
+- utter_array_second_question_from_bank
+- utter_array_second_hint1
+- utter_array_second_hint2
+- utter_array_second_complete_solution
+- utter_array_second_understood
+- utter_array_third_question_from_bank
+- utter_array_third_hint1
+- utter_array_third_hint2
+- utter_array_third_complete_solution
+- utter_array_third_understood
+- utter_good_job
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+  
+  utter_array_question_bank:
+  - text: "*We are up here to make you excellent programmer from zero level*\n\n
+      We have just the course for you.\n\n
+      I am your tutor i  will teach you different data structure and algorithims courses
+      In this course,i will teach you differnt programming questions of array topics with varying difficulty \n 
+      Let us start with the first question of bank\n"
+    buttons:
+    - title: "Arrays first Question"
+      payload: "134refrtrg_AFQFB"
+      
+  utter_array_first_question_from_bank:
+  - text: "This is the first array question can you solve this.\nProblem Statement :\nYou are given n line segments. For each line segment you are given starting and \nending x coordinates. You have to find maximum number of lines which intersects at\nany coordinate. Assume that all line segments are on X- Axis.\ninput\n 7\n2.00 2.10 3.00 3.20 3.50 5.00\n2.30 3.40 3.20 4.30 4.00 5.20\nOutput\n31"
+    buttons:
+    - title: "Yes"
+      payload: "2w13e2e23e_AFQU"
+    - title: "No"
+      payload: "43deftgv7u_AFQH1"
+
+  utter_array_first_hint1:
+  - text: "Can you try in term of sorting start and end coordinate array in ascending order.\n\n.Can you solve this now\n\n"
+    buttons: 
+    - title: "Yes"
+      payload: "2w13e2e23e_AFQU"
+    - title: "No"
+      payload: "12wqasdcxe_AFQH2"
+  utter_array_first_hint2:
+  - text: "Can you try using two pointers in sorted array  merging two sorted array then \n according to condition start[i]<=end[j] then current_intersection+=1 and i++ \n\nelse we will decrement current platform req and j--.\n We will have maximum of all current_intersection as answer\n\ncan you solve this question now\n"
+    buttons: 
+    - title: "Yes"
+      payload: "2w13e2e23e_AFQU"
+    - title: "No"
+      payload: "34wqamk9ol_AFQCS"
+
+  utter_array_first_complete_solution:
+  - text: 
+      "#include<bits/stdc++.h>\n
+      using namespace std;\n
+      int solve(double start[], double end[],int n)\n
+      {\n
+      // maintains the count of intersected lines\n
+      int count = 0;\n
+      sort(start,start+n);\n
+      sort(end,end+n);\n
+      // stores minimum maxIntersection \n
+      int maxIntersection = 0;\n
+
+      // take two indices for start and end coordinates\n
+      int i = 0, j = 0;\n
+
+      // run till any line start is coming\n
+      while (i < n)\n
+      {\n
+        // if line is start next\n
+        if (start[i] <= end[j])\n
+        {\n
+            // increase the count of intersection and update maximum intersections\n
+            
+            maxIntersection = max(maxIntersection, ++count);\n
+
+            // move the pointer to next start\n
+            i++;\n
+        }\n
+
+        // if line is about to end next  i.e.\n
+        // (end[j] < start[i]), decrease the count of intersectio\n
+        // and move pointer j to next end\n
+        else\n
+            count--, j++;\n
+      }\n
+
+      return maxIntersection;\n
+      }\n
+      int main()\n
+      {\n
+    
+          int n;\n
+          cin>>n;\n
+          double a[n],d[n];\n
+          for(int i=0;i<n;i++)\n
+          cin>>a[i];\n
+          for(int i=0;i<n;i++)\n
+          cin>>d[i];\n
+          cout<<solve(a,d,n)<<endl;\n
+    
+        }\n
+        
+        
+        This is the complete c++ code for the Given problem\n\n\ i hope you got the solution\n\n"
+    buttons:
+    - title: "Yes"
+      payload: "2w13e2e23e_AFQU"
+      
+  utter_array_first_understood:
+  - text: "Hope u understands the solution of given problem"
+    buttons:
+    - title: " After first question let us go for second question \n"
+      payload: "asdewvch58_ASQFB"
+
+
+  utter_array_second_question_from_bank:
+  - text: 
+      "Problem Statement :\n
+      Given an array of strings where each string represents a number,\n Concatenate strings in
+      such a way that\n it forms largest number as a result of concatenation.\n
+      input\n 
+      5\n
+      19 13 16 3 6\n
+      
+      Output\n
+      63191613\n
+      \n"
+    buttons:
+    - title: "Yes"
+      payload: "oldjfjp947_ASQU"
+    - title: "No"
+      payload: "18hbbfbygh_ASQH1"
+
+  utter_array_second_hint1:
+  - text: "We will sorting to get greatest number formed\n.can you solve this question now\n"
+    buttons: 
+    - title: "Yes"
+      payload: "oldjfjp947_ASQU"
+    - title: "No"
+      payload: "yhnjoiu785_ASQH2"
+  utter_array_second_hint2:
+  - text: "Sorting done by modifying comparator\n.can you solve this question now\n"
+    buttons: 
+    - title: "Yes"
+      payload: "oldjfjp947_ASQU"
+    - title: "No"
+      payload: "iknhgrde42_ASQCS"
+
+  utter_array_second_complete_solution:
+  - text: 
+      "This is complete solution for this question\n 
+      #include<bits/stdc++.h>\n
+      using namespace std;\n
+      bool cmp(string a,string b)\n
+      {\n
+        // for every two comparision we trying to get combination which result in greater number\n
+          string xy=a+b;\n
+          string yx=b+a;\n
+          return xy>yx;// taking order which will result greater number\n
+      }\n
+      string solve(string ar[],int n) {\n
+
+        sort(ar,ar+n,cmp);//Sorting using above compartor\n
+
+        string s;\n
+
+        //after sorting we making number by concatnating all the strings\n
+        for(int i=0;i<n;i++)\n
+          s=s+ar[i];\n
+
+        return s;\n
+      }\n
+      int main()\n
+      {\n
+        
+          int n,S;\n
+          cin>>n;\n
+          string a[n];\n
+          for(int i=0;i<n;i++)\n
+            cin>>a[i];\n
+          
+          cout<<solve(a,n)<<endl;\n
+        
+      }\n
+      hope its visible to u\n "
+    buttons:
+    - title: "Yes"
+      payload: "oldjfjp947_ASQU"
+      
+  utter_array_second_understood:
+  - text: "Hope u understands the solution of given problem\n"
+    buttons:
+    - title: " After second question let us go for third question \n"
+      payload: "oplkgtrv49_ATQFB"
+  utter_array_third_question_from_bank:
+  - text: 
+      "This is the third array question can you solve this\n
+      Problem Statement :\n
+      There are N coding problems lined up for you,You are given\n 
+      an array which tells the no of points you get after solving a partcular\n
+      question. you can get negative points also for a question. Constraint\n
+      is that you can take questions from left or right side only.You have to take\n
+      K questions and try to get maximum points by solving those K questions.\n
+      print the maximum points that you can get.\n
+
+      Input \n
+      6    //n\n
+      5 -3 -2 3 1 2  //elements\n
+      4  //number of quesions K\n
+
+      Output : \n
+      8\n"
+    buttons:
+    - title: "Yes"
+      payload: "opytredcvb_ATQU"
+    - title: "No"
+      payload: "ghuytrdcg6_ATQH1"
+
+  utter_array_third_hint1:
+  - text: 
+      "This is first hint to solve this question.\n
+      First maintain prefix and suffix sum of the array.\n
+      can you solve this question now\n"
+    buttons: 
+    - title: "Yes"
+      payload: "opytredcvb_ATQU"
+    - title: "No"
+      payload: "8567457edc_ATQH2"
+
+  utter_array_third_hint2:
+  - text: 
+      "This is second hint to solve this question.\n
+      Try every possiblity of number of preobelms taken from left and right\n
+      side and find the maximum of all possiblity.\n
+      can you solve this question now\n"
+    buttons: 
+    - title: "Yes"
+      payload: "opytredcvb_ATQU"
+    - title: "No"
+      payload: "ujnkloi674_ATQCS"
+
+  utter_array_third_complete_solution:
+  - text: 
+      "This is complete solution for this question hope its visible to u \n
+      #include<bits/stdc++.h>\n
+      using namespace std;\n
+      int solve(int A[],int n, int K) {\n
+
+
+      long long int pre[n+1]={0};\n
+      long long int suff[n+1]={0};\n
+
+      //Preftx array calculation\n
+      // pre[i]=store sum of initial i elements\n
+      for(int i=0;i<n;i++)\n
+          pre[i+1]=A[i]+pre[i];\n
+
+      int j=0;\n
+
+      //Suffix array calculation\n
+      // suff[i] strore sum of i elements fro end;\n
+      for(int i=n-1;i>=0;i--)\n
+      {\n
+          suff[j+1]=A[i]+suff[j];\n
+          
+          j++;\n
+      }\n
+      long long int ans=INT_MIN;\n
+
+      //front is basically number of elements we are taking from left side and remaining we take from right side \n
+      for(int front=0;front<=K;front++)\n
+      {\n
+          ans=max(ans,suff[K-front]+pre[front]); //taking maximum of all possiblity\n
+      }\n
+      return ans\n;
+              
+      }\n"
+    buttons:
+    - title: "Yes"
+      payload: "opytredcvb_ATQU"
+      
+  utter_array_third_understood:
+  - text: "Hope u understands the solution of given problem"
+    
+  
+  utter_good_job:
+  - text: "Well done. Good job. Keep learning. Have a nice day" 
+  
+
+
+session_config:
+  session_expiration_time: 60
+carry_over_slots_to_new_session: true
